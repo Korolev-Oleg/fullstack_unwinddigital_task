@@ -1,0 +1,65 @@
+version: '0.1.0'
+
+x-environment: &x-env
+  environment:
+    - BACKEND_DEBUG=True
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_USER=postgres
+
+services:
+  db:
+    container_name: postgres-db
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: always
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready"
+    <<: *x-env
+
+  backend:
+    container_name: backend
+    ports:
+      - '8000:8000'
+    build:
+      context: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - postgres
+      - backend
+    volumes:
+      - ./backend:/app
+    entrypoint: /app/entrypoint.sh
+    <<: *x-env
+    environment:
+      - BACKEND_SECRET_KEY={{ BACKEND_SECRET_KEY }}
+      - DATABASE_HOST=db
+
+  frontend:
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    build:
+      context: ./frontend
+    networks:
+      - backend
+    volumes:
+      - ./frontend:/app
+    entrypoint: /app/entrypoint.sh
+    environment:
+      - HOST=0.0.0.0
+      - NODE_ENV=development
+
+
+networks:
+  postgres:
+  backend:
+
+volumes:
+  postgres:
