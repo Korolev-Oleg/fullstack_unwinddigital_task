@@ -25,6 +25,13 @@
 ```
 
 # Запуск
+Запуск может занять некоторое время из-за health проверки `pg_isready`
+
+Требование к памяти`16Gb+ RAM`
 ```shell 
 docker-compose -f docker-compose.yml up --build
 ```
+
+API заказов доступны по адресу [http://localhost:8000/api/v1/orders](http://localhost:8000/api/v1/orders)
+
+Frontend [http://localhost:3000/](http://localhost:3000/)

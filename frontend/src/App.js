@@ -8,6 +8,8 @@ import MainNavbar from "./components/Header";
 import TotalSum from "./components/TotalSum";
 
 
+const BACKEND_URL = 'localhost:8000';
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -16,14 +18,16 @@ export default class App extends React.Component {
     }
   }
 
-  fetchData(){
-    fetch('http://localhost:8000/api/v1/orders')
-    .then(response => response.json())
-    .then(data => {
-      this.setState({
-        data: data.result,
-      });
-    })
+  fetchData() {
+    console.log('stateddk')
+    console.log(this.state);
+    fetch(`http://localhost:8000/api/v1/orders`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          data: data.result,
+        });
+      })
   }
 
   componentDidMount() {

@@ -20,6 +20,8 @@ services:
     healthcheck:
       test: "pg_isready"
     <<: *x-env
+    environment:
+      - BACKEND_URL=backend
 
   backend:
     container_name: backend
