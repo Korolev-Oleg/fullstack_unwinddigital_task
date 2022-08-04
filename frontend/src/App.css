@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.graph{
+  float: left;
+}
+.table{
+  gap: 30px;
+}
+
+.info{
+  display: flex;
+}
+.total-sum{
+  width: 100%;
+}
+.total-sum>table{
+  text-align: center;
+}
