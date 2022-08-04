@@ -1,11 +1,13 @@
 from datetime import datetime
 
 import gspread
+import pydantic
 from fastapi.routing import APIRouter
 from fastapi_utils import tasks
 from collections import deque
 
 from src.settings import AppSettings
+from src.db import models
 from src import crud, services
 
 router = APIRouter()
@@ -35,6 +37,12 @@ async def get_data_from_google_sheet():
             'price_usd': sheet_row['стоимость,$'],
             'delivery_date': delivery_date,
         }
+        try:
+            models.OrderModel(**new_order)
+        except pydantic.ValidationError:
+            logger.error(f'Invalid order: {new_order}')
+            continue
+
         orders_for_update.append(new_order)
 
     await crud.update_orders_queue(orders_for_update)

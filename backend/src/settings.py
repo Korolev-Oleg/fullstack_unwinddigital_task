@@ -1,11 +1,18 @@
 import os
 import sys
 
-from pydantic import BaseConfig
+from pydantic import BaseConfig, BaseModel, BaseSettings
 import loguru
 from pathlib import Path
 
 loguru.logger.add('logs/app.log', rotation='100 MB', enqueue=True)
+
+
+class DBConf(BaseSettings):
+    host = os.getenv('DATABASE_HOST', 'localhost')
+    database = os.getenv('DATABASE_NAME', 'postgres')
+    user = os.getenv('DATABASE_USER', 'postgres')
+    password = os.getenv('DATABASE_PASSWORD', 'postgres')
 
 
 class AppSettings(BaseConfig):
@@ -13,10 +20,7 @@ class AppSettings(BaseConfig):
     AppSettings
     """
 
-    ALLOW_ORIGINS = [
-        'http://localhost:8000',
-        'http://localhost:3000'
-    ]
+    ALLOW_ORIGINS = ['http://localhost:8000', 'http://localhost:3000']
 
     DEBUG: bool = os.environ.get('BACKEND_DEBUG', False)
 
@@ -25,12 +29,7 @@ class AppSettings(BaseConfig):
     )
     GOOGLE_SHEET_DOCUMENT_URL = 'https://docs.google.com/spreadsheets/d/1N8Ln2IRyhNbjXEr9l0bcxE9yxtjDLwOlqsQWD2vYtgA/edit#gid=0'
 
-    DATABASE = {
-        'host': os.environ.get('DATABASE_HOST', 'localhost'),
-        'database': os.environ.get('POSTGRES_DATABASE', 'postgres'),
-        'user': os.environ.get('POSTGRES_USER', 'postgres'),
-        'password': os.environ.get('POSTGRES_PASSWORD', 'postgres'),
-    }
+    DATABASE = DBConf()
 
     SECRET_KEY: str = os.environ.get(
         "BACKEND_SECRET_KEY", "SECRET_KEY_!@#$%^&*()_+"
@@ -41,3 +40,4 @@ class AppSettings(BaseConfig):
 assert (
     AppSettings.GOOGLE_SHEET_CREEDS_FILE.exists() is True
 ), f'Google Sheet creds file not found at path {AppSettings.GOOGLE_SHEET_CREEDS_FILE}'
+

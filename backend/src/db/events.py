@@ -9,7 +9,7 @@ async def connect_to_db(app: FastAPI) -> None:
     logger.info("Connecting to PostgreSQL")
 
     app.state.pool = await asyncpg.create_pool(
-        **AppSettings.DATABASE,
+        **AppSettings.DATABASE.dict(),
     )
 
     logger.info("Connection established")

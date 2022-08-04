@@ -1,6 +1,7 @@
 -- name: get-orders
 SELECT *
- FROM orders;
+ FROM orders
+ order by delivery_date asc;
 
 -- name: get_order_by_id
 SELECT (order_id, number, price_usd, delivery_date)

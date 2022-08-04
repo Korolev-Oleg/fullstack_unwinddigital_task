@@ -23,14 +23,15 @@ class OrderResponse(models.OrderModel):
 
 
 @router.get('/orders')
+@logger.catch()
 async def get_orders(conn: Connection = Depends(get_connection_from_pool)):
     result = await queries.get_orders(conn)
     if result:
         usd_rate = await services.get_usd_exchange_rate()
         orders_with_price = []
-        for order in result:
-            order_model = OrderResponse(**order)
-            order_model.price_rub = order_model.price_usd * usd_rate
+        for order_record in result:
+            order_model = OrderResponse(**order_record)
+            order_model.price_rub = round(order_model.price_usd * usd_rate, 2)
             orders_with_price.append(order_model)
         result = orders_with_price
     return {'result': result}

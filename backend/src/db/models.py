@@ -18,18 +18,5 @@ class Base(BaseModel):
 class OrderModel(Base):
     order_id: int
     number: int
-    price_usd: Decimal
+    price_usd: Decimal = Field(default=0.0)
     delivery_date: date
-
-
-if __name__ == '__main__':
-    d = {
-        '№': 50,
-        # 'заказ №': 1426726,
-        # 'стоимость,$': 1997,
-        # 'срок поставки': '20.05.2022',
-    }
-
-    # o = OrderModel(**d)
-
-    # O = OrderModel(order_id=50)

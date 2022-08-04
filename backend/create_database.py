@@ -5,7 +5,7 @@ from src.settings import AppSettings
 
 
 logger.info("Migrating database")
-con = psycopg2.connect(**AppSettings.DATABASE)
+con = psycopg2.connect(**AppSettings.DATABASE.dict())
 cur = con.cursor()
 
 cur.execute(
