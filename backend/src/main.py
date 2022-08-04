@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src import events, tasks, api
+from src.settings import AppSettings
 
 
 def get_application():
@@ -10,6 +11,7 @@ def get_application():
 
     application.add_middleware(
         CORSMiddleware,
+        allow_origins=AppSettings.ALLOW_ORIGINS,
     )
 
     application.add_event_handler(

@@ -13,6 +13,11 @@ class AppSettings(BaseConfig):
     AppSettings
     """
 
+    ALLOW_ORIGINS = [
+        'http://localhost:8000',
+        'http://localhost:3000'
+    ]
+
     DEBUG: bool = os.environ.get('BACKEND_DEBUG', False)
 
     GOOGLE_SHEET_CREEDS_FILE = (

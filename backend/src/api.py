@@ -22,7 +22,7 @@ class OrderResponse(models.OrderModel):
     price_rub: float = Field(default=0.0)
 
 
-@router.get('/')
+@router.get('/orders')
 async def get_orders(conn: Connection = Depends(get_connection_from_pool)):
     result = await queries.get_orders(conn)
     if result:
@@ -32,5 +32,5 @@ async def get_orders(conn: Connection = Depends(get_connection_from_pool)):
             order_model = OrderResponse(**order)
             order_model.price_rub = order_model.price_usd * usd_rate
             orders_with_price.append(order_model)
-        return orders_with_price
+        result = orders_with_price
     return {'result': result}

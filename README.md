@@ -1,4 +1,4 @@
-> Stack:`Python` `Fastapi` `asyncpg` `Postgresql` `Js` `React`
+> Stack: `Python` `Fastapi` `asyncpg` `Postgresql` `Js` `React`
  
 [Тех-задание](https://unwinddigital.notion.site/c/Python-1fdcee22ef5345cf82b058c333818c08)
 

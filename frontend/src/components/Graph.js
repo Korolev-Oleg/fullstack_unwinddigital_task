@@ -311,6 +311,18 @@ function AreaChart(props) {
 
 AreaChart.propTypes = {children: PropTypes.node};
 export default class Graph extends React.Component {
+  constructor(responseData, loading) {
+    super();
+    this.state = {
+      responseData: responseData,
+      loading: loading,
+    };
+  }
+
+  componentDidMount() {
+    console.log(this.state.responseData);
+  }
+
   render() {
     return (
       <LineChart
