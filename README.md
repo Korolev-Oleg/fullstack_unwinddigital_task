@@ -1,7 +1,9 @@
+> Stack:`Python` `Fastapi` `asyncpg` `Postgresql` `Js` `React`
+ 
 [Тех-задание](https://unwinddigital.notion.site/c/Python-1fdcee22ef5345cf82b058c333818c08)
 
 # Подготовка
- Создать файл `backent/google_sheets_creeds.json` содержащий учетные данные сервисного аккаунта
+ Создать файл `backend/google_sheets_creeds.json` содержащий учетные данные сервисного аккаунта
 для доступа к Google Sheets API. 
 
 В настройках есть проверка вызывающая исключение `AssertionError: Google Sheet creds file not found at path ... /backend/google_sheets_creeds.json`.

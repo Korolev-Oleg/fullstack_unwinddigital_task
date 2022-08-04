@@ -1,8 +1,8 @@
 import psycopg2
+from loguru import logger
 
 from src.settings import AppSettings
 
-logger = AppSettings.logger
 
 logger.info("Migrating database")
 con = psycopg2.connect(**AppSettings.DATABASE)
