@@ -32,4 +32,5 @@ RUN poetry install --no-interaction --no-ansi
 RUN apk del --no-cache build-deps
 
 COPY /entrypoint.sh /app/
-CMD ["./entrypoint.sh"]
+RUN chmod +x /app/entrypoint.sh
+CMD ["/bin/sh", "./entrypoint.sh"]

@@ -3,8 +3,9 @@ version: '0.1.0'
 x-environment: &x-env
   environment:
     - BACKEND_DEBUG=True
-    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_PASSWORD=password
     - POSTGRES_USER=postgres
+    - DATABASE_HOST=db
 
 services:
   db:
@@ -20,8 +21,6 @@ services:
     healthcheck:
       test: "pg_isready"
     <<: *x-env
-    environment:
-      - BACKEND_URL=backend
 
   backend:
     container_name: backend
@@ -37,11 +36,8 @@ services:
       - backend
     volumes:
       - ./backend:/app
-    entrypoint: /app/entrypoint.sh
+    entrypoint: /bin/sh /app/entrypoint.sh
     <<: *x-env
-    environment:
-      - BACKEND_SECRET_KEY={{ BACKEND_SECRET_KEY }}
-      - DATABASE_HOST=db
 
   frontend:
     container_name: frontend
@@ -53,7 +49,7 @@ services:
       - backend
     volumes:
       - ./frontend:/app
-    entrypoint: /app/entrypoint.sh
+    entrypoint: /bin/sh /app/entrypoint.sh
     environment:
       - HOST=0.0.0.0
       - NODE_ENV=development

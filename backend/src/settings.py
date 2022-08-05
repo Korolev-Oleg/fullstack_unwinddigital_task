@@ -11,8 +11,8 @@ loguru.logger.add('logs/app.log', rotation='100 MB', enqueue=True)
 class DBConf(BaseSettings):
     host = os.getenv('DATABASE_HOST', 'localhost')
     database = os.getenv('DATABASE_NAME', 'postgres')
-    user = os.getenv('DATABASE_USER', 'postgres')
-    password = os.getenv('DATABASE_PASSWORD', 'postgres')
+    user = os.getenv('POSTGRES_USER', 'postgres')
+    password = os.getenv('POSTGRES_PASSWORD', 'password')
 
 
 class AppSettings(BaseConfig):

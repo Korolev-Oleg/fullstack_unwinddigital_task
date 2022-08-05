@@ -17,6 +17,7 @@ aiosql = "^6.1"
 fastapi-utils = "^0.2.1"
 gspread = "^5.4.0"
 requests-async = "^0.6.2"
+ipython = "^8.4.0"
 
 [tool.poetry.dev-dependencies]
 
