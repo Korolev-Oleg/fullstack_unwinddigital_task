@@ -1,6 +1,7 @@
 > Stack: `Python` `Fastapi` `asyncpg` `Postgresql` `Js` `React`
  
 [Тех-задание](https://unwinddigital.notion.site/unwinddigital/Python-1fdcee22ef5345cf82b058c333818c08)
+![image](https://user-images.githubusercontent.com/18235953/183679521-33f5da48-68bd-4171-a449-9ac23caf2ce8.png)
 
 # Подготовка
  Создать файл `backend/google_sheets_creeds.json` содержащий учетные данные сервисного аккаунта
